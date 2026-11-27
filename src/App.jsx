@@ -21,7 +21,7 @@ engine.addSystem(MovementSystem)
 engine.addSystem(ItemSystem)
 engine.addSystem(CollisionSystem)
     
-    engine.start()
+    engine.getState().status = "MENU"
     
     let lastTime = performance.now()
 

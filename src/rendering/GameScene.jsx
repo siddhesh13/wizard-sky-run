@@ -1,20 +1,70 @@
+
 import { Canvas } from "@react-three/fiber"
 import { Suspense, useEffect, useState, useRef, useMemo } from "react"
-import ItemsMesh from "./ItemsMesh"
+
 import PlayerMesh from "./PlayerMesh"
+import ItemsMesh from "./ItemsMesh"
 import CameraRig from "./CameraRig"
+
 import MainMenu from "../ui/MainMenu"
 import Leaderboard from "../ui/Leaderboard"
-import { saveScore } from "../utils/leaderboard"
+import GameHUD from "../ui/GameHUD"
+
 import VisionInput from "../input/VisionInput"
-import { connectArduino, sendArduinoCommand } from "../utils/arduino"
+
+import { saveScore } from "../utils/leaderboard"
+import { sendArduinoCommand } from "../utils/arduino"
+
+const overlayStyle = {
+  position: "absolute",
+  inset: 0,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 30,
+  background: "rgba(5, 10, 25, 0.58)",
+  fontFamily: "Arial, sans-serif"
+}
+
+const panelStyle = {
+  width: "min(90%, 420px)",
+  padding: "32px",
+  borderRadius: "22px",
+  textAlign: "center",
+  color: "white",
+  background: "rgba(15, 22, 45, 0.96)",
+  border: "1px solid rgba(255,255,255,0.18)",
+  boxShadow: "0 20px 60px rgba(0,0,0,0.4)"
+}
+
+const primaryButtonStyle = {
+  padding: "12px 24px",
+  border: "none",
+  borderRadius: "9px",
+  background: "#43c979",
+  color: "#082416",
+  fontSize: "15px",
+  fontWeight: "bold",
+  cursor: "pointer"
+}
+
+const secondaryButtonStyle = {
+  ...primaryButtonStyle,
+  background: "rgba(255,255,255,0.12)",
+  color: "white",
+  border: "1px solid rgba(255,255,255,0.2)"
+}
 
 export default function GameScene({ engine }) {
   const [state, setState] = useState(engine.getState())
   const [showLeaderboard, setShowLeaderboard] = useState(false)
+
   const hasSavedRef = useRef(false)
 
-  // ---------- Generate environment once ----------
+  // --------------------------------
+  // Environment
+  // --------------------------------
+
   const stars = useMemo(() => {
     return Array.from({ length: 200 }).map(() => ({
       position: [
@@ -45,28 +95,30 @@ export default function GameScene({ engine }) {
     }))
   }, [])
 
-  // ---------- UI update loop ----------
+  // --------------------------------
+  // Engine state polling and end handling
+  // --------------------------------
+
   useEffect(() => {
     const interval = setInterval(() => {
       const currentState = engine.getState()
+
       setState({ ...currentState })
 
-     
+      if (
+        (currentState.status === "GAME_OVER" ||
+          currentState.status === "WIN") &&
+        !hasSavedRef.current
+      ) {
+        saveScore(
+          currentState.playerName,
+          Math.floor(currentState.score.value)
+        )
 
-     if (
-  (currentState.status === "GAME_OVER" ||
-   currentState.status === "WIN") &&
-  !hasSavedRef.current
-) {
-  saveScore(
-    currentState.playerName,
-    currentState.score.value
-  )
+        sendArduinoCommand(currentState.status)
 
-  sendArduinoCommand(currentState.status)
-
-  hasSavedRef.current = true
-}
+        hasSavedRef.current = true
+      }
 
       if (currentState.status === "PLAYING") {
         hasSavedRef.current = false
@@ -76,24 +128,69 @@ export default function GameScene({ engine }) {
     return () => clearInterval(interval)
   }, [engine])
 
-  // ---------- Press R to return to MENU ----------
+  // --------------------------------
+  // Game navigation
+  // --------------------------------
+
+  const returnToMenu = () => {
+    engine.reset()
+    engine.getState().status = "MENU"
+
+    setShowLeaderboard(false)
+    hasSavedRef.current = false
+    setState({ ...engine.getState() })
+  }
+
+  const playAgain = () => {
+    const playerName = engine.getState().playerName
+
+    engine.reset()
+    engine.getState().playerName = playerName
+    engine.start()
+
+    setShowLeaderboard(false)
+    hasSavedRef.current = false
+    setState({ ...engine.getState() })
+  }
+
+  // --------------------------------
+  // Keyboard controls for end screens
+  // --------------------------------
+
   useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key.toLowerCase() === "r" && state.status === "GAME_OVER") {
-        engine.reset()
-        engine.getState().status = "MENU"
-        setShowLeaderboard(false)
-        hasSavedRef.current = false
+    const handleKey = (event) => {
+      if (
+        state.status !== "GAME_OVER" &&
+        state.status !== "WIN"
+      ) {
+        return
+      }
+
+      if (event.key === "Enter") {
+        playAgain()
+      }
+
+      if (
+        event.key === "Escape" ||
+        event.key.toLowerCase() === "r"
+      ) {
+        returnToMenu()
       }
     }
 
     window.addEventListener("keydown", handleKey)
-    return () => window.removeEventListener("keydown", handleKey)
-  }, [state.status, engine])
+
+    return () => {
+      window.removeEventListener("keydown", handleKey)
+    }
+  }, [state.status])
 
   return (
     <>
-      {/* MENU */}
+      {/* --------------------------------
+          MAIN MENU
+      -------------------------------- */}
+
       {state.status === "MENU" && !showLeaderboard && (
         <MainMenu
           engine={engine}
@@ -101,85 +198,150 @@ export default function GameScene({ engine }) {
         />
       )}
 
+      {/* --------------------------------
+          LEADERBOARD
+      -------------------------------- */}
+
       {state.status === "MENU" && showLeaderboard && (
         <Leaderboard
           onBack={() => setShowLeaderboard(false)}
         />
       )}
 
-      {/* SCORE */}
+      {/* --------------------------------
+          GAME HUD
+      -------------------------------- */}
+
       {state.status === "PLAYING" && (
-        <div
-          style={{
-            position: "absolute",
-            top: 20,
-            left: 20,
-            fontSize: "24px",
-            fontWeight: "bold",
-            color: "white",
-            zIndex: 10,
-            fontFamily: "sans-serif"
-          }}
-        >
-          Score: {state.score.value.toFixed(0)}
-        </div>
+        <GameHUD state={state} />
       )}
 
-      {/* GAME OVER */}
+      {/* --------------------------------
+          GAME OVER SCREEN
+      -------------------------------- */}
+
       {state.status === "GAME_OVER" && (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            textAlign: "center",
-            color: "white",
-            zIndex: 20,
-            fontFamily: "sans-serif"
-          }}
-        >
-          <h2>GAME OVER</h2>
-          <p>Press R to return to Menu</p>
+        <div style={overlayStyle}>
+          <div style={panelStyle}>
+            <div style={{ fontSize: "48px" }}>💔</div>
+
+            <h1 style={{ margin: "10px 0", color: "#ff7373" }}>
+              GAME OVER
+            </h1>
+
+            <p style={{ color: "#b9c2d8" }}>
+              You ran out of lives. Keep making healthy choices!
+            </p>
+
+            <div style={statsGridStyle}>
+              <Stat label="FINAL SCORE" value={Math.floor(state.score.value)} />
+              <Stat label="HEALTHY ITEMS" value={state.score.healthyCollected} />
+              <Stat label="UNHEALTHY HITS" value={state.score.unhealthyHits} />
+              <Stat label="BEST STREAK" value={state.score.bestStreak} />
+            </div>
+
+            <div style={buttonGroupStyle}>
+              <button
+                style={primaryButtonStyle}
+                onClick={playAgain}
+              >
+                Play Again
+              </button>
+
+              <button
+                style={secondaryButtonStyle}
+                onClick={returnToMenu}
+              >
+                Main Menu
+              </button>
+            </div>
+
+            <p style={hintStyle}>
+              Enter: Play Again &nbsp; | &nbsp; R / Esc: Main Menu
+            </p>
+          </div>
         </div>
       )}
-      {state.status === "WIN" && (
-  <div
-    style={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      textAlign: "center",
-      color: "white",
-      zIndex: 20,
-      fontFamily: "sans-serif"
-    }}
-  >
-    <h1>YOU WIN 🧙‍♂️</h1>
-    <p>Score: {state.score.value.toFixed(0)}</p>
-    <p>Press R to return to Menu</p>
-  </div>
-)}
 
-      {/* Computer Vision */}
+      {/* --------------------------------
+          WIN SCREEN
+      -------------------------------- */}
+
+      {state.status === "WIN" && (
+        <div style={overlayStyle}>
+          <div style={panelStyle}>
+            <div style={{ fontSize: "48px" }}>🏆</div>
+
+            <h1 style={{ margin: "10px 0", color: "#8effb0" }}>
+              YOU DID IT!
+            </h1>
+
+            <p style={{ color: "#b9c2d8" }}>
+              Great job! You collected enough healthy items.
+            </p>
+
+            <div style={statsGridStyle}>
+              <Stat label="FINAL SCORE" value={Math.floor(state.score.value)} />
+              <Stat label="HEALTHY ITEMS" value={state.score.healthyCollected} />
+              <Stat label="UNHEALTHY HITS" value={state.score.unhealthyHits} />
+              <Stat label="BEST STREAK" value={state.score.bestStreak} />
+            </div>
+
+            <div style={buttonGroupStyle}>
+              <button
+                style={primaryButtonStyle}
+                onClick={playAgain}
+              >
+                Play Again
+              </button>
+
+              <button
+                style={secondaryButtonStyle}
+                onClick={returnToMenu}
+              >
+                Main Menu
+              </button>
+            </div>
+
+            <p style={hintStyle}>
+              Enter: Play Again &nbsp; | &nbsp; R / Esc: Main Menu
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* --------------------------------
+          COMPUTER VISION
+      -------------------------------- */}
+
       <VisionInput engine={engine} />
 
-      {/* 3D WORLD */}
+      {/* --------------------------------
+          3D WORLD
+      -------------------------------- */}
+
       <Canvas
         style={{
           position: "absolute",
           top: 0,
-          left: 0
+          left: 0,
+          width: "100%",
+          height: "100%"
         }}
-        camera={{ position: [0, 5, 14], fov: 70 }}
+        camera={{
+          position: [0, 5, 14],
+          fov: 70
+        }}
       >
-        {/* Sky */}
         <color attach="background" args={["#0b1026"]} />
-        <fog attach="fog" args={["#0b1026", 30, 200]} />
 
-        {/* Lights */}
+        <fog
+          attach="fog"
+          args={["#0b1026", 30, 200]}
+        />
+
         <ambientLight intensity={0.4} />
+
         <directionalLight
           position={[5, 15, 5]}
           intensity={1}
@@ -187,8 +349,10 @@ export default function GameScene({ engine }) {
         />
 
         {/* Moon */}
+
         <mesh position={[20, 25, -80]}>
           <sphereGeometry args={[5, 32, 32]} />
+
           <meshStandardMaterial
             color="#ddddff"
             emissive="#8888ff"
@@ -197,6 +361,7 @@ export default function GameScene({ engine }) {
         </mesh>
 
         {/* Stars */}
+
         {stars.map((star, i) => (
           <mesh key={i} position={star.position}>
             <sphereGeometry args={[0.2, 8, 8]} />
@@ -205,9 +370,11 @@ export default function GameScene({ engine }) {
         ))}
 
         {/* Clouds */}
+
         {clouds.map((cloud, i) => (
           <mesh key={i} position={cloud.position}>
             <sphereGeometry args={[3, 16, 16]} />
+
             <meshStandardMaterial
               color="#ccccff"
               transparent
@@ -217,6 +384,7 @@ export default function GameScene({ engine }) {
         ))}
 
         {/* Distant Towers */}
+
         {towers.map((tower, i) => (
           <mesh key={i} position={tower.position}>
             <cylinderGeometry args={[2, 3, 15, 8]} />
@@ -224,23 +392,22 @@ export default function GameScene({ engine }) {
           </mesh>
         ))}
 
-        {/* Camera */}
         <CameraRig engine={engine} />
 
-        {/* Player */}
         <PlayerMesh engine={engine} />
 
-        {/* Healthy and unhealthy collectibles */}
-<Suspense fallback={null}>
-  <ItemsMesh engine={engine} />
-</Suspense>
+        <Suspense fallback={null}>
+          <ItemsMesh engine={engine} />
+        </Suspense>
 
         {/* Cloud Ground */}
+
         <mesh
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -0.01, -150]}
         >
           <planeGeometry args={[50, 1000]} />
+
           <meshStandardMaterial
             color="#d0d8ff"
             transparent
@@ -249,8 +416,10 @@ export default function GameScene({ engine }) {
         </mesh>
 
         {/* Fog Layer */}
+
         <mesh position={[0, 2, -100]}>
           <planeGeometry args={[200, 400]} />
+
           <meshStandardMaterial
             color="#8899ff"
             transparent
@@ -260,4 +429,53 @@ export default function GameScene({ engine }) {
       </Canvas>
     </>
   )
+}
+
+function Stat({ label, value }) {
+  return (
+    <div style={statCardStyle}>
+      <div style={statLabelStyle}>{label}</div>
+      <div style={statValueStyle}>{value}</div>
+    </div>
+  )
+}
+
+const statsGridStyle = {
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: "10px",
+  margin: "24px 0"
+}
+
+const statCardStyle = {
+  padding: "14px 8px",
+  borderRadius: "10px",
+  background: "rgba(255,255,255,0.07)"
+}
+
+const statLabelStyle = {
+  fontSize: "10px",
+  letterSpacing: "1px",
+  color: "#aeb9d0",
+  marginBottom: "7px"
+}
+
+const statValueStyle = {
+  fontSize: "25px",
+  fontWeight: "bold",
+  color: "white"
+}
+
+const buttonGroupStyle = {
+  display: "flex",
+  justifyContent: "center",
+  flexWrap: "wrap",
+  gap: "12px"
+}
+
+const hintStyle = {
+  marginTop: "22px",
+  marginBottom: 0,
+  color: "#8994ad",
+  fontSize: "11px"
 }

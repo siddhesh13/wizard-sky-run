@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="plateBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+  <g transform="rotate(-35 64 64)">
+    <!-- Handlebar -->
+    <rect x="34" y="58" width="60" height="12" rx="3" fill="#CBD5E1" stroke="#1E293B" stroke-width="3"/>
+    <!-- Knurling lines -->
+    <line x1="54" y1="59" x2="54" y2="69" stroke="#64748B" stroke-width="2"/>
+    <line x1="60" y1="59" x2="60" y2="69" stroke="#64748B" stroke-width="2"/>
+    <line x1="68" y1="59" x2="68" y2="69" stroke="#64748B" stroke-width="2"/>
+    <line x1="74" y1="59" x2="74" y2="69" stroke="#64748B" stroke-width="2"/>
+    <!-- Left plates -->
+    <rect x="26" y="38" width="11" height="52" rx="4" fill="url(#plateBlue)" stroke="#1E293B" stroke-width="3"/>
+    <rect x="15" y="44" width="11" height="40" rx="4" fill="url(#plateBlue)" stroke="#1E293B" stroke-width="3"/>
+    <!-- Right plates -->
+    <rect x="91" y="38" width="11" height="52" rx="4" fill="url(#plateBlue)" stroke="#1E293B" stroke-width="3"/>
+    <rect x="102" y="44" width="11" height="40" rx="4" fill="url(#plateBlue)" stroke="#1E293B" stroke-width="3"/>
+  </g>
+</svg>

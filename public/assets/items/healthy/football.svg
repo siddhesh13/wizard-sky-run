@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="ballShade" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F1F5F9"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </radialGradient>
+  </defs>
+  <!-- Outer sphere -->
+  <circle cx="64" cy="64" r="46" fill="url(#ballShade)" stroke="#1E293B" stroke-width="3.5"/>
+  <!-- Center pentagon -->
+  <polygon points="64,46 81,58 75,78 53,78 47,58" fill="#1E293B"/>
+  <!-- Seam lines -->
+  <line x1="64" y1="46" x2="64" y2="26" stroke="#1E293B" stroke-width="3"/>
+  <line x1="81" y1="58" x2="99" y2="52" stroke="#1E293B" stroke-width="3"/>
+  <line x1="75" y1="78" x2="86" y2="94" stroke="#1E293B" stroke-width="3"/>
+  <line x1="53" y1="78" x2="42" y2="94" stroke="#1E293B" stroke-width="3"/>
+  <line x1="47" y1="58" x2="29" y2="52" stroke="#1E293B" stroke-width="3"/>
+  <!-- Edge pentagons -->
+  <polygon points="64,18 76,25 64,28 52,25" fill="#1E293B"/>
+  <polygon points="108,52 100,64 97,52 102,42" fill="#1E293B"/>
+  <polygon points="20,52 28,64 31,52 26,42" fill="#1E293B"/>
+  <polygon points="88,102 76,97 85,92 95,94" fill="#1E293B"/>
+  <polygon points="40,102 52,97 43,92 33,94" fill="#1E293B"/>
+</svg>

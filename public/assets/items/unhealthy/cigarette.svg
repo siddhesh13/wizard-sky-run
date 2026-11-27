@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="filterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="paperGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <radialGradient id="emberGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="50%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </radialGradient>
+  </defs>
+  <!-- Smoke curls -->
+  <path d="M 96 54 C 92 42, 108 38, 102 25 C 98 17, 106 12, 110 10"
+        fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 104 60 C 102 50, 116 46, 112 34 C 109 27, 115 22, 118 20"
+        fill="none" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <!-- Cigarette body rotated -->
+  <g transform="rotate(-35 60 72)">
+    <!-- Filter butt -->
+    <rect x="14" y="64" width="28" height="16" rx="2" fill="url(#filterGrad)" stroke="#1E293B" stroke-width="3"/>
+    <!-- Filter dots -->
+    <circle cx="21" cy="69" r="1.2" fill="#78350F"/>
+    <circle cx="27" cy="75" r="1.2" fill="#78350F"/>
+    <circle cx="33" cy="69" r="1.2" fill="#78350F"/>
+    <!-- White tube -->
+    <rect x="42" y="64" width="54" height="16" fill="url(#paperGrad)" stroke="#1E293B" stroke-width="3"/>
+    <!-- Gold band -->
+    <rect x="42" y="64" width="4" height="16" fill="#FBBF24" stroke="#1E293B" stroke-width="1.5"/>
+    <!-- Ash & glowing ember tip -->
+    <rect x="96" y="64" width="10" height="16" rx="2" fill="url(#emberGlow)" stroke="#1E293B" stroke-width="3"/>
+    <path d="M 96 64 L 99 69 L 95 73 L 98 80" fill="none" stroke="#334155" stroke-width="2"/>
+  </g>
+</svg>

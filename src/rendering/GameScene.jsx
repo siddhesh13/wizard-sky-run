@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber"
-import { useEffect, useState, useRef, useMemo } from "react"
+import { Suspense, useEffect, useState, useRef, useMemo } from "react"
+import ItemsMesh from "./ItemsMesh"
 import PlayerMesh from "./PlayerMesh"
-import ObstaclesMesh from "./ObstaclesMesh"
 import CameraRig from "./CameraRig"
 import MainMenu from "../ui/MainMenu"
 import Leaderboard from "../ui/Leaderboard"
@@ -230,8 +230,10 @@ export default function GameScene({ engine }) {
         {/* Player */}
         <PlayerMesh engine={engine} />
 
-        {/* Obstacles */}
-        <ObstaclesMesh engine={engine} />
+        {/* Healthy and unhealthy collectibles */}
+<Suspense fallback={null}>
+  <ItemsMesh engine={engine} />
+</Suspense>
 
         {/* Cloud Ground */}
         <mesh

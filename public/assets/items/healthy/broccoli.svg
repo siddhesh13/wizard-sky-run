@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="stalkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#86EFAC"/>
+      <stop offset="100%" stop-color="#22C55E"/>
+    </linearGradient>
+  </defs>
+  <!-- Stalk -->
+  <path d="M 52 66 L 76 66 L 72 110 C 72 114, 56 114, 56 110 Z"
+        fill="url(#stalkGrad)" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M 46 66 L 56 82" fill="none" stroke="#16A34A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 82 66 L 72 82" fill="none" stroke="#16A34A" stroke-width="4" stroke-linecap="round"/>
+  <!-- Fluffy florets crown -->
+  <path d="M 34 68 C 20 68, 16 48, 30 42 C 28 26, 48 18, 60 28 C 70 16, 94 22, 94 38 C 110 42, 108 66, 92 68 Z"
+        fill="#16A34A" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Inner floret highlights -->
+  <path d="M 36 48 C 40 38, 52 38, 56 46" fill="none" stroke="#4ADE80" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 68 44 C 74 36, 86 38, 90 48" fill="none" stroke="#4ADE80" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 54 32 C 60 26, 70 26, 74 32" fill="none" stroke="#86EFAC" stroke-width="3" stroke-linecap="round"/>
+</svg>

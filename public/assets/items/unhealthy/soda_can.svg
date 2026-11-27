@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="canRed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="55%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+  </defs>
+  <!-- Fizzy bubbles -->
+  <circle cx="82" cy="18" r="4.5" fill="#7DD3FC" stroke="#1E293B" stroke-width="2"/>
+  <circle cx="94" cy="26" r="3" fill="#BAE6FD" stroke="#1E293B" stroke-width="1.8"/>
+  <circle cx="72" cy="12" r="2.5" fill="#7DD3FC" stroke="#1E293B" stroke-width="1.5"/>
+  <g transform="rotate(10 64 68)">
+    <!-- Can body -->
+    <rect x="38" y="30" width="52" height="82" rx="8" fill="url(#canRed)" stroke="#1E293B" stroke-width="3"/>
+    <!-- Dynamic white wave -->
+    <path d="M 38 66 C 52 54, 74 78, 90 64 L 90 80 C 74 94, 52 70, 38 82 Z" fill="#FFFFFF"/>
+    <!-- Top & bottom silver rims -->
+    <rect x="40" y="26" width="48" height="7" rx="3.5" fill="#E2E8F0" stroke="#1E293B" stroke-width="2.5"/>
+    <rect x="41" y="108" width="46" height="6" rx="3" fill="#94A3B8" stroke="#1E293B" stroke-width="2.5"/>
+    <!-- Specular shine -->
+    <line x1="46" y1="38" x2="46" y2="102" stroke="#FCA5A5" stroke-width="3.5" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>

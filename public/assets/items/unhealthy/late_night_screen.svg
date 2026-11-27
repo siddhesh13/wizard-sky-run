@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="screenGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+  </defs>
+  <!-- Smartphone -->
+  <g transform="rotate(-10 56 66)">
+    <rect x="30" y="20" width="52" height="92" rx="9" fill="#1E293B" stroke="#1E293B" stroke-width="3"/>
+    <rect x="35" y="28" width="42" height="74" rx="4" fill="url(#screenGlow)" stroke="#1E293B" stroke-width="2"/>
+    <!-- Endless feed cards -->
+    <rect x="40" y="34" width="32" height="18" rx="2" fill="#DBEAFE" opacity="0.9"/>
+    <rect x="40" y="56" width="32" height="18" rx="2" fill="#BFDBFE" opacity="0.8"/>
+    <rect x="40" y="78" width="32" height="18" rx="2" fill="#93C5FD" opacity="0.7"/>
+    <!-- Speaker notch -->
+    <line x1="51" y1="24" x2="61" y2="24" stroke="#64748B" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <!-- Late-night crescent moon badge -->
+  <path d="M 96 18 C 84 20, 78 32, 82 44 C 86 55, 99 60, 110 55 C 100 54, 92 46, 91 35 C 90 27, 92 22, 96 18 Z"
+        fill="#FACC15" stroke="#1E293B" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>

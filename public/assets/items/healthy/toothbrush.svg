@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Clean sparkles -->
+  <path d="M 96 22 L 99 30 L 107 33 L 99 36 L 96 44 L 93 36 L 85 33 L 93 30 Z" fill="#FACC15" stroke="#1E293B" stroke-width="1.5"/>
+  <path d="M 52 24 L 54 29 L 59 31 L 54 33 L 52 38 L 50 33 L 45 31 L 50 29 Z" fill="#38BDF8"/>
+  <g transform="rotate(-42 64 68)">
+    <!-- Bristles -->
+    <rect x="74" y="44" width="32" height="16" rx="3" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+    <line x1="82" y1="45" x2="82" y2="59" stroke="#CBD5E1" stroke-width="2"/>
+    <line x1="90" y1="45" x2="90" y2="59" stroke="#CBD5E1" stroke-width="2"/>
+    <line x1="98" y1="45" x2="98" y2="59" stroke="#CBD5E1" stroke-width="2"/>
+    <!-- Mint toothpaste swirl -->
+    <path d="M 73 44 C 77 35, 95 35, 105 41 C 108 43, 104 46, 98 46 L 75 46 Z"
+          fill="#2DD4BF" stroke="#1E293B" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- Handle -->
+    <path d="M 14 63 C 14 59, 64 59, 72 60 L 106 60 C 109 60, 109 67, 106 67 L 70 67 C 60 67, 18 71, 14 67 Z"
+          fill="#10B981" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+</svg>

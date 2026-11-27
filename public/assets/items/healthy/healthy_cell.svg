@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="healthyCyto" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#E0F2FE"/>
+      <stop offset="55%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </radialGradient>
+    <radialGradient id="normalNuc" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="65%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </radialGradient>
+  </defs>
+  <!-- Smooth, uniform, plump circular cell membrane -->
+  <circle cx="64" cy="64" r="46" fill="url(#healthyCyto)" stroke="#1E293B" stroke-width="3.2"/>
+  <!-- Inner lipid bilayer ring -->
+  <circle cx="64" cy="64" r="40" fill="none" stroke="#BAE6FD" stroke-width="2" opacity="0.85"/>
+  <!-- Neat, uniform, centered round nucleus -->
+  <circle cx="64" cy="64" r="18" fill="url(#normalNuc)" stroke="#1E293B" stroke-width="2.8"/>
+  <!-- Single tidy nucleolus + nuclear highlight -->
+  <circle cx="67" cy="62" r="4.5" fill="#93C5FD"/>
+  <path d="M 54 56 C 56 52, 60 50, 64 50" fill="none" stroke="#DBEAFE" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Orderly healthy organelles -->
+  <ellipse cx="40" cy="46" rx="5.5" ry="3" transform="rotate(-35 40 46)" fill="#34D399" stroke="#1E293B" stroke-width="1.8"/>
+  <ellipse cx="88" cy="82" rx="5.5" ry="3" transform="rotate(-35 88 82)" fill="#34D399" stroke="#1E293B" stroke-width="1.8"/>
+  <ellipse cx="86" cy="44" rx="5" ry="2.8" transform="rotate(35 86 44)" fill="#34D399" stroke="#1E293B" stroke-width="1.8"/>
+  <circle cx="40" cy="82" r="3.5" fill="#FDE047" stroke="#1E293B" stroke-width="1.6"/>
+  <!-- Membrane specular highlight -->
+  <path d="M 32 42 C 37 32, 46 26, 56 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+</svg>

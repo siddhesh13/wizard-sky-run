@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="darkCan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3F3F46"/>
+      <stop offset="50%" stop-color="#18181B"/>
+      <stop offset="100%" stop-color="#09090B"/>
+    </linearGradient>
+  </defs>
+  <!-- Electric sparks -->
+  <path d="M 32 34 L 22 28 L 28 24" fill="none" stroke="#84CC16" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 96 34 L 106 28 L 100 24" fill="none" stroke="#84CC16" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Slim tall can -->
+  <rect x="42" y="22" width="44" height="90" rx="7" fill="url(#darkCan)" stroke="#1E293B" stroke-width="3"/>
+  <!-- Neon top & bottom accents -->
+  <rect x="44" y="18" width="40" height="6" rx="3" fill="#CBD5E1" stroke="#1E293B" stroke-width="2.5"/>
+  <rect x="44" y="108" width="40" height="6" rx="3" fill="#94A3B8" stroke="#1E293B" stroke-width="2.5"/>
+  <rect x="43.5" y="28" width="41" height="5" fill="#84CC16"/>
+  <!-- Glowing Lightning Bolt -->
+  <polygon points="68,38 51,68 63,68 58,96 78,62 65,62"
+           fill="#A3E635" stroke="#ECFCCB" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>

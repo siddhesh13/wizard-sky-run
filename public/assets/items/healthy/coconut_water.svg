@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="cocoGreen" cx="35%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="60%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#15803D"/>
+    </radialGradient>
+  </defs>
+  <!-- Bendy striped straw -->
+  <path d="M 64 46 L 78 22 L 98 18" fill="none" stroke="#F97316" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 64 46 L 78 22 L 98 18" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-dasharray="5 6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 64 46 L 78 22 L 98 18" fill="none" stroke="#1E293B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Tender green coconut body -->
+  <path d="M 32 48 C 22 64, 24 94, 42 108 C 54 116, 74 116, 86 108 C 104 94, 106 64, 96 48 Z"
+        fill="url(#cocoGreen)" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Sliced white top -->
+  <ellipse cx="64" cy="48" rx="32" ry="11" fill="#F0FDF4" stroke="#1E293B" stroke-width="3"/>
+  <!-- Coconut water opening -->
+  <ellipse cx="64" cy="48" rx="14" ry="5" fill="#BAE6FD" stroke="#1E293B" stroke-width="2"/>
+  <!-- Shine -->
+  <path d="M 34 68 C 33 78, 36 88, 42 95" fill="none" stroke="#BBF7D0" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

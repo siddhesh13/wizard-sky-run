@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="sunCore" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="60%" stop-color="#FACC15"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </radialGradient>
+  </defs>
+  <!-- 8 Sun rays -->
+  <g fill="#FBBF24" stroke="#1E293B" stroke-width="2.5" stroke-linejoin="round">
+    <polygon points="64,12 70,26 58,26"/>
+    <polygon points="64,116 70,102 58,102"/>
+    <polygon points="12,64 26,58 26,70"/>
+    <polygon points="116,64 102,58 102,70"/>
+    <polygon points="27,27 41,33 33,41"/>
+    <polygon points="101,101 87,95 95,87"/>
+    <polygon points="101,27 95,41 87,33"/>
+    <polygon points="27,101 33,87 41,95"/>
+  </g>
+  <!-- Sun disc -->
+  <circle cx="64" cy="64" r="30" fill="url(#sunCore)" stroke="#1E293B" stroke-width="3"/>
+  <!-- Cheerful serene expression -->
+  <path d="M 51 60 Q 54 56 57 60" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 71 60 Q 74 56 77 60" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 55 70 Q 64 78 73 70" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

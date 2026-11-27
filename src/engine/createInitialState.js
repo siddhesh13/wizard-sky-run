@@ -52,7 +52,8 @@ export function createInitialState() {
     meta: {
       timeElapsed: 0,
       lastObstacleSpawn: 0,
-      lastItemSpawn: 0
+      lastItemSpawn: 0,
+      lastItemLane: null
     }
   }
 }
